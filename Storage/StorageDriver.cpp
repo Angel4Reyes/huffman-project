@@ -40,7 +40,7 @@ int main()
     std::string header  = storage->getHeader();
 
     // prep a string variable to pass by reference
-    std::string result ="";
+    std::string result = "";
 
     // extract all binary string 8 bits at a time until there is nothing left to read
     while (storage->extract(result)) {

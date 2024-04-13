@@ -1,0 +1,4 @@
+/Users/angelreyes/CLionProjects/huffman-coding-Angel4Reyes/cmake-build-debug-coverage/CMakeFiles/huffman.dir
+/Users/angelreyes/CLionProjects/huffman-coding-Angel4Reyes/cmake-build-debug-coverage/CMakeFiles/StorageDriver.dir
+/Users/angelreyes/CLionProjects/huffman-coding-Angel4Reyes/cmake-build-debug-coverage/CMakeFiles/edit_cache.dir
+/Users/angelreyes/CLionProjects/huffman-coding-Angel4Reyes/cmake-build-debug-coverage/CMakeFiles/rebuild_cache.dir

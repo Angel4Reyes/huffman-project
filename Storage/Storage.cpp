@@ -63,7 +63,7 @@ void Storage::insert(std::string binary_string) {
 
     // write out bits 8 at a time
     while(buffer.size() >= 8) {
-//        std::cout << buffer << std::endl;
+        //std::cout << buffer << std::endl;
         // get the next 8 bits
         std::string bit_string = buffer.substr(0,8);
         // remove the next 8 bits from the buffer

@@ -1,0 +1,69 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.23"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "huffman",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "StorageDriver::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-StorageDriver-Debug-8d906374aa4deeb72179.json",
+					"name" : "StorageDriver",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "huffman::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-huffman-Debug-f4864426a1901e58fef5.json",
+					"name" : "huffman",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/angelreyes/CLionProjects/huffman-coding-Angel4Reyes/cmake-build-debug-coverage",
+		"source" : "/Users/angelreyes/CLionProjects/huffman-coding-Angel4Reyes"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}
