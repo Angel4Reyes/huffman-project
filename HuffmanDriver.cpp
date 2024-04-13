@@ -16,14 +16,14 @@ int main() {
     if (1 == choice) {
         cout << "Enter the path of the file to be compressed: ";
         cin >> in_file;
-        cout << "Enter the path where you'd like the decompress file to be saved: ";
+        cout << "Enter the path where you'd like the compressed file to be saved: ";
         cin >> out_file;
         compressor->compress(in_file, out_file);
 
     } else if (2 == choice) {
         cout << "Enter the path of the file to be decompressed: ";
         cin >> in_file;
-        cout << "Enter the path where you'd like the uncompressed file to be saved: ";
+        cout << "Enter the path where you'd like the decompressed file to be saved: ";
         cin >> out_file;
         compressor->decompress(in_file, out_file);
 

@@ -19,16 +19,15 @@ void Huffman::compress(string infile, string outfile) {
     // build huffman tree
     buildTree();
 
-    // build ascii
+    // build ascii/binary map
     buildAscii(huffman, "");
 
-    // store
+    // store compressed file
     store(infile, outfile);
 
-    // close file after use
+    // close file
     file.close();
 }
-
 
 void Huffman::countChar() {
     char current;
@@ -39,6 +38,7 @@ void Huffman::countChar() {
             char_count[current]++;
         }
     }
+    char_count.emplace(end_of_text, 1);
     file.close();
     return;
 }
@@ -75,7 +75,6 @@ void Huffman::buildAscii(Node *next, string code) {
         buildAscii(next->zero, code + "0");
         buildAscii(next->one, code + "1");
         }
-
 }
 
 void Huffman::store(string infile, string outfile) {
@@ -83,11 +82,7 @@ void Huffman::store(string infile, string outfile) {
     // Create a new storage object
     Storage *storage = new Storage();
 
-
-    // Open a StorageDriverTest.txt for writing
-    std::string out = "StorageDriverTest.txt";              // TODO change to outfile when done
-
-    if (!storage->open(out, "write")) {
+    if (!storage->open(outfile, "write")) {
         std::cout << "There was an error opening the file." << std::endl;
         exit(0);
     }
@@ -95,13 +90,14 @@ void Huffman::store(string infile, string outfile) {
     for (auto it = ascii.begin(); it != ascii.end(); it++){
         header = header + it->first + it->second + deliminator;
     }
-
+    // set header
     storage->setHeader(header);
 
    // cout << header << endl;
 
     file.open(infile);
 
+    // while there are characters, write the characters binary code into file
     char currentChar;
     while(file.get(currentChar)) {
         // check if character is in ascii map
@@ -111,36 +107,17 @@ void Huffman::store(string infile, string outfile) {
             storage->insert(binary);
         }
     }
-
-
-//        char garbage;
-//        for (auto i = binary.rbegin(); i != binary.rend(); --i) {
-//            if(binary.find_first_of(deliminator)){
-//                int i = binary.find_first_of(deliminator);
-//                while(!binary.back()){
-//                    binary.erase(i);
-//                    i++;
-//                }
-//                binary.pop_back();
-//                binary.shrink_to_fit();
-//                break;
-//            }
-//        }
-
+    storage->insert(ascii[end_of_text]);
     storage->close();
 
     return;
-
 }
 
 void Huffman::decompress(string infile, string outfile) {
-
+    // create storage object
     Storage *storage = new Storage();
 
-    // Open a StorageDriverTest.txt for writing
-    std::string fileName = "StorageDriverTest.txt";
-
-    if (!storage->open(fileName, "read")) {
+    if (!storage->open(infile, "read")) {
         std::cout << "There was an error opening the file." << std::endl;
         exit(0);
     }
@@ -183,32 +160,30 @@ void Huffman::rebuildAscii(Storage *storage) {
 
 void Huffman::decode(Storage *storage, string outfile) {
 
-    // Create a new storage object
-
     string binary = "";
-    string code = "";
     string current_code = "";
-    // string poop = "00000000";
-    // extract all binary string 8 bits at a time until there is nothing left to read
-    while(storage->extract(binary)) {
-       //if(binary == poop){break;}
-        code += binary;
-    }
-
     string decoded = "";
 
-    for (int i = 0; i < code.size(); ++i) {
-        current_code += code.at(i);
-        if (rebuilt_ascii.find(current_code) != rebuilt_ascii.end()) {
-            auto iter = rebuilt_ascii.find(current_code);
-            decoded += iter->second;
-            current_code = ""; // Reset current_code for the next character
+
+    // extract all binary string 8 bits at a time until there is nothing left to read
+    while(storage->extract(binary)) {
+        string code = binary;
+        for (int i = 0; i < code.size(); ++i) {
+            current_code += code.at(i);
+            if (rebuilt_ascii.find(current_code) != rebuilt_ascii.end()){
+                if(rebuilt_ascii[current_code] == end_of_text){
+                    break;
+                }
+                auto iter = rebuilt_ascii.find(current_code);
+                decoded += iter->second;
+                current_code = ""; // Reset current_code for the next character
+            }
         }
     }
 
     ofstream output_file;
     char curr;
-    output_file.open("StorageDriverTest.ext.txt");
+    output_file.open(outfile);
     for (int i = 0; i < decoded.size(); ++i) {
         curr = decoded.at(i);
         output_file.put(curr);
