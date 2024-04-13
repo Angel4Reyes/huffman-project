@@ -48,3 +48,15 @@ I've also included a Node.h file that can be used for the huffman tree or as an 
 
 
 ## Enter you description below:
+
+to compress the file i first open it, then call a function count characters which puts the characters in a file and 
+their number of occurances into a map count_char. Then i create a priority queue of nodes with values of the character 
+they hold and weight which is number of occurances. then using that queue i build a huffman tree so where the leafs
+of the tree are the nodes that hold characters. then i build my map "ascii" which has a character as the key
+ and it holds the binary code that the character is represented by. I then create a header using this map to format
+a string such as "character" followed by the "binary" followed by a delimeter so i can read later to decode.
+then i read in the original text file and create a binary string of the text file to insert into a new file of binary.
+
+to decompress i read in the header from the compressed file and use that to create a new map this time the key is 
+the binary code and it represents a character, once i have this map i can begin to decode the compressed file and out
+put the decoded text into a new file 
